@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { DrawCardButton } from './components/Button/DrawCardButton';
+import { Card } from './components/Card/Card';
+import { DrawnCards } from './components/DrawnCards/DrawnCards';
+import { cards } from './data/cards'
 
+
+export const CardContext = React.createContext();
 function App() {
+
+  const [cardList, setCardList] = useState(cards);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CardContext.Provider value={{ cardList, setCardList }}>
+      <div className="App">
+        <Card cardValue="5" cardType={"Heart"} />
+        <DrawCardButton />
+        <DrawnCards />
+      </div>
+    </CardContext.Provider>
   );
 }
 
